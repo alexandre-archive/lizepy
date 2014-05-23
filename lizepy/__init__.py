@@ -2,7 +2,7 @@ import json
 import re
 import sys
 
-python26 = sys.version_info is tuple
+python26 = isinstance(sys.version_info, tuple)
 
 if python26 or sys.version_info.major == 2:
     from urllib2 import Request, urlopen, HTTPError
