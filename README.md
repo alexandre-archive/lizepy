@@ -1,4 +1,4 @@
-# pylize
+# pylize [![Build Status](https://travis-ci.org/alexandrevicenzi/pylize.svg)](https://travis-ci.org/alexandrevicenzi/pylize)
 
 Python lib for Telize JSON IP and GeoIP REST API
 
