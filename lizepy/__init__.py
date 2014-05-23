@@ -2,17 +2,15 @@ import json
 import re
 import sys
 
-python26 = isinstance(sys.version_info, tuple)
-
-if python26 or sys.version_info.major == 2:
+if sys.version_info[0] == 2:
     from urllib2 import Request, urlopen, HTTPError
-elif sys.version_info.major == 3:
+elif sys.version_info[0] == 3:
     from urllib.request import Request, urlopen
     from urllib.error import HTTPError
 else:
     raise ImportError('Module for urllib found.')
 
-if python26 or sys.version_info.major < 3:
+if sys.version_info[0] < 3:
     from cStringIO import StringIO
 else:
     from io import StringIO
@@ -127,6 +125,6 @@ def get_geoip(ip=None):
     else:
         return None
 
-# if __name__ == '__main__':
-#     print(get_ip())
-#     print(get_geoip())
+if __name__ == '__main__':
+    print(get_ip())
+    print(get_geoip())
