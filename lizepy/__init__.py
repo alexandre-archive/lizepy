@@ -1,9 +1,20 @@
 import iptools
 import json
 import re
-import urllib2
+import sys
 
-from cStringIO import StringIO
+if sys.version_info.major == 2:
+    from urllib2 import Request, urlopen, HTTPError
+elif sys.version_info.major == 3:
+    from urllib.request import Request, urlopen
+    from urllib.error import HTTPError
+else:
+    raise ImportError('Module for urllib found.')
+
+if sys.version_info.major < 3:
+    from cStringIO import StringIO
+else:
+    from io import StringIO
 
 TELIZE_BASE_URL = 'http://www.telize.com'
 TELIZE_BASE_URL_IP = TELIZE_BASE_URL + '/jsonip'
@@ -54,11 +65,11 @@ def __json(value):
 
 def __get(url):
 
-    req = urllib2.Request(url, headers={ 'Accept': 'application/json' })
+    req = Request(url, headers={ 'Accept': 'application/json' })
 
     try:
-        response = urllib2.urlopen(req)
-    except urllib2.HTTPError as e:
+        response = urlopen(req)
+    except HTTPError as e:
         response = e
 
     if response.headers.get('Content-Encoding') == 'gzip':
@@ -68,7 +79,7 @@ def __get(url):
     else:
         body = response.read()
 
-    return {'code' : response.code, 'body' : __json(body)}
+    return {'code' : response.code, 'body' : __json(body.decode('utf-8'))}
 
 def is_valid_ip(ip):
     if not ip: return False
@@ -130,3 +141,7 @@ def get_geoip(ip=None):
         return g
     else:
         return None
+
+# if __name__ == '__main__':
+#     print(get_ip())
+#     print(get_geoip())

@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name='lizepy',
-    version='0.1.0',
+    version='0.2.0',
     author='Alexandre Vicenzi',
     author_email='vicenzi.alexandre@gmail.com',
     packages=['lizepy'],

@@ -1,6 +1,5 @@
-import unittest
-
 import lizepy
+import unittest
 
 class TestLizePy(unittest.TestCase):
 
@@ -39,7 +38,8 @@ class TestLizePy(unittest.TestCase):
 
     def test_ip(self):
         ip = lizepy.get_ip()
-        self.assertIsInstance(ip, unicode)
+        self.assertNotEqual(ip, '')
+        self.assertNotEqual(ip, None)
 
     def test_ip_with_invalid_url(self):
         # Force an error.
