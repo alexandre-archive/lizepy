@@ -89,5 +89,8 @@ class TestLizePy(unittest.TestCase):
         self.assertEqual(geoip['country_code'] , 'US')
         self.assertEqual(geoip['country_code3'] , 'USA')
 
+    def test_geoip_none(self):
+        self.assertRaises(lizepy.get_geoip(None))
+
 if __name__ == '__main__':
     unittest.main()
