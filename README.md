@@ -5,13 +5,19 @@ Python lib for Telize JSON IP and GeoIP REST API
 ### usage
 
 ```python
-import pylize```
+import pylize
+```
+
+### Methods from pylize:
 
 ```python
 ip = pylize.get_ip()
 print(ip)
-geoip = pylize.get_geoip('8.8.8.8')```
+geoip = pylize.get_geoip('8.8.8.8')
+```
 
+
+### Properties from GeoIP class
 
 ```python
 geoip.ip or geoip['ip']
@@ -29,5 +35,6 @@ geoip.dma_code or geoip['dma_code']
 geoip.area_code or geoip['area_code']
 geoip.asn or geoip['asn']
 geoip.isp or geoip['isp']
-geoip.timezone or geoip['timezone']```
+geoip.timezone or geoip['timezone']
+```
 
