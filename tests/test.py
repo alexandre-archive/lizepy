@@ -6,36 +6,6 @@ class TestLizePy(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_is_valid_ip_empty(self):
-        self.assertFalse(lizepy.is_valid_ip(''))
-
-    def test_is_valid_ip_none(self):
-        self.assertFalse(lizepy.is_valid_ip(None))
-
-    def test_is_valid_ip_v4_0_0_0_0(self):
-        self.assertTrue(lizepy.is_valid_ip('0.0.0.0'))
-
-    def test_is_valid_ip_v4_255_255_255_255(self):
-        self.assertTrue(lizepy.is_valid_ip('255.255.255.255'))
-
-    def test_is_valid_ip_v4_127_0_0_1(self):
-        self.assertTrue(lizepy.is_valid_ip('127.0.0.1'))
-
-    def test_is_valid_ip_v4_127_0_0_400(self):
-        self.assertFalse(lizepy.is_valid_ip('127.0.0.400'))
-
-    def test_is_valid_ip_v4_255_0_256_255(self):
-        self.assertFalse(lizepy.is_valid_ip('255.0.256.255'))
-
-    def test_is_valid_ip_v6_2001(self):
-        self.assertTrue(lizepy.is_valid_ip('2001:0db8:85a3:08d3:1319:8a2e:0370:7344'))
-
-    def test_is_valid_ip_v6_1(self):
-        self.assertTrue(lizepy.is_valid_ip('::1'))
-
-    def test_is_valid_ip_v6_2607(self):
-        self.assertTrue(lizepy.is_valid_ip('2607:f0d0:1002:51::4'))
-
     def test_ip(self):
         ip = lizepy.get_ip()
         self.assertNotEqual(ip, '')

@@ -1,4 +1,3 @@
-import iptools
 import json
 import re
 import sys
@@ -21,14 +20,6 @@ else:
 TELIZE_BASE_URL = 'http://www.telize.com'
 TELIZE_BASE_URL_IP = TELIZE_BASE_URL + '/jsonip'
 TELIZE_BASE_URL_GEOIP = TELIZE_BASE_URL + '/geoip/'
-
-class InvalidIPException(Exception):
-
-    def __init__(self, ip):
-        self.msg = '%s is not a valid IP address.' % ip
-
-    def __str__(self):
-         return repr(self.msg)
 
 class GeoIP:
 
@@ -83,10 +74,6 @@ def __get(url):
 
     return {'code' : response.code, 'body' : __json(body.decode('utf-8'))}
 
-def is_valid_ip(ip):
-    if not ip: return False
-    return iptools.ipv4.validate_ip(ip) or iptools.ipv6.validate_ip(ip)
-
 def get_ip():
     '''
         Returns the visitor IP address (IPv4 or IPv6).
@@ -110,10 +97,6 @@ def get_geoip(ip=None):
 
     if ip:
         assert(type(ip) == str)
-
-        if not is_valid_ip(ip):
-            raise InvalidIPException(ip)
-
         url = url + ip
 
     response = __get(url)
