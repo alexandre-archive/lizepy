@@ -3,7 +3,9 @@ import json
 import re
 import sys
 
-if sys.version_info.major == 2:
+python26 = sys.version_info is tuple
+
+if python26 or sys.version_info.major == 2:
     from urllib2 import Request, urlopen, HTTPError
 elif sys.version_info.major == 3:
     from urllib.request import Request, urlopen
@@ -11,7 +13,7 @@ elif sys.version_info.major == 3:
 else:
     raise ImportError('Module for urllib found.')
 
-if sys.version_info.major < 3:
+if python26 or sys.version_info.major < 3:
     from cStringIO import StringIO
 else:
     from io import StringIO
