@@ -1,64 +1,64 @@
 import unittest
 
-import pylize
+import lizepy
 
-class TestPyLize(unittest.TestCase):
+class TestLizePy(unittest.TestCase):
 
     def setUp(self):
         pass
 
     def test_is_valid_ip_empty(self):
-        self.assertFalse(pylize.is_valid_ip(''))
+        self.assertFalse(lizepy.is_valid_ip(''))
 
     def test_is_valid_ip_none(self):
-        self.assertFalse(pylize.is_valid_ip(None))
+        self.assertFalse(lizepy.is_valid_ip(None))
 
     def test_is_valid_ip_v4_0_0_0_0(self):
-        self.assertTrue(pylize.is_valid_ip('0.0.0.0'))
+        self.assertTrue(lizepy.is_valid_ip('0.0.0.0'))
 
     def test_is_valid_ip_v4_255_255_255_255(self):
-        self.assertTrue(pylize.is_valid_ip('255.255.255.255'))
+        self.assertTrue(lizepy.is_valid_ip('255.255.255.255'))
 
     def test_is_valid_ip_v4_127_0_0_1(self):
-        self.assertTrue(pylize.is_valid_ip('127.0.0.1'))
+        self.assertTrue(lizepy.is_valid_ip('127.0.0.1'))
 
     def test_is_valid_ip_v4_127_0_0_400(self):
-        self.assertFalse(pylize.is_valid_ip('127.0.0.400'))
+        self.assertFalse(lizepy.is_valid_ip('127.0.0.400'))
 
     def test_is_valid_ip_v4_255_0_256_255(self):
-        self.assertFalse(pylize.is_valid_ip('255.0.256.255'))
+        self.assertFalse(lizepy.is_valid_ip('255.0.256.255'))
 
     def test_is_valid_ip_v6_2001(self):
-        self.assertTrue(pylize.is_valid_ip('2001:0db8:85a3:08d3:1319:8a2e:0370:7344'))
+        self.assertTrue(lizepy.is_valid_ip('2001:0db8:85a3:08d3:1319:8a2e:0370:7344'))
 
     def test_is_valid_ip_v6_1(self):
-        self.assertTrue(pylize.is_valid_ip('::1'))
+        self.assertTrue(lizepy.is_valid_ip('::1'))
 
     def test_is_valid_ip_v6_2607(self):
-        self.assertTrue(pylize.is_valid_ip('2607:f0d0:1002:51::4'))
+        self.assertTrue(lizepy.is_valid_ip('2607:f0d0:1002:51::4'))
 
     def test_ip(self):
-        ip = pylize.get_ip()
+        ip = lizepy.get_ip()
         self.assertIsInstance(ip, unicode)
 
     def test_ip_with_invalid_url(self):
         # Force an error.
-        pylize.TELIZE_BASE_URL_IP = 'http://www.example.com/ip'
-        ip = pylize.get_ip()
+        lizepy.TELIZE_BASE_URL_IP = 'http://www.example.com/ip'
+        ip = lizepy.get_ip()
         self.assertIsNone(ip)
 
     def test_geoip(self):
-        ip = pylize.get_geoip()
-        self.assertIsInstance(ip, pylize.GeoIP)
+        ip = lizepy.get_geoip()
+        self.assertIsInstance(ip, lizepy.GeoIP)
 
     def test_geoip_with_invalid_url(self):
         # Force an error.
-        pylize.TELIZE_BASE_URL_GEOIP = 'http://www.example.com/ip'
-        ip = pylize.get_geoip()
+        lizepy.TELIZE_BASE_URL_GEOIP = 'http://www.example.com/ip'
+        ip = lizepy.get_geoip()
         self.assertIsNone(ip)
 
     def test_geoip_google(self):
-        geoip = pylize.get_geoip('8.8.8.8')
+        geoip = lizepy.get_geoip('8.8.8.8')
 
         self.assertEqual(geoip.ip, geoip['ip'])
         self.assertEqual(geoip.country_code, geoip['country_code'])

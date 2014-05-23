@@ -1,19 +1,19 @@
-# pylize [![Build Status](https://travis-ci.org/alexandrevicenzi/pylize.svg)](https://travis-ci.org/alexandrevicenzi/pylize)
+# LizePy [![Build Status](https://travis-ci.org/alexandrevicenzi/lizepy.svg)](https://travis-ci.org/alexandrevicenzi/lizepy)
 
 Python lib for Telize JSON IP and GeoIP REST API
 
 ### usage
 
 ```python
-import pylize
+import lizepy
 ```
 
-### Methods from pylize:
+### Methods from lizepy:
 
 ```python
-ip = pylize.get_ip()
+ip = lizepy.get_ip()
 print(ip)
-geoip = pylize.get_geoip('8.8.8.8')
+geoip = lizepy.get_geoip('8.8.8.8')
 ```
 
 
