@@ -2,24 +2,32 @@
 
 Python lib for Telize JSON IP and GeoIP REST API
 
-### usage
+### Requirements
+
+Python 2.6 or later
+
+### Usage
 
 ```python
 import lizepy
 ```
 
-### Methods from lizepy:
+#### Getting your IP
 
 ```python
 ip = lizepy.get_ip()
 print(ip)
-geoip = lizepy.get_geoip('8.8.8.8')
+>>> '0.0.0.0'
 ```
 
 
-### Properties from GeoIP class
+#### Getting GeoIP data
 
 ```python
+geoip = lizepy.get_geoip('8.8.8.8') or lizepy.get_geoip()
+
+# Return None if the field is not present.
+
 geoip.ip or geoip['ip']
 geoip.country_code or geoip['country_code']
 geoip.country_code3 or geoip['country_code3']
