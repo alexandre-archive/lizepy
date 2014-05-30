@@ -1,4 +1,4 @@
-# LizePy [![Build Status](https://travis-ci.org/alexandrevicenzi/lizepy.svg)](https://travis-ci.org/alexandrevicenzi/lizepy)
+# LizePy [![Build Status](https://travis-ci.org/alexandrevicenzi/lizepy.svg)](https://travis-ci.org/alexandrevicenzi/lizepy) [![Coverage Status](https://coveralls.io/repos/alexandrevicenzi/lizepy/badge.png)](https://coveralls.io/r/alexandrevicenzi/lizepy)
 
 Python lib for Telize JSON IP and GeoIP REST API
 
