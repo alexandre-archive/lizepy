@@ -2,6 +2,8 @@
 
 Python lib for Telize JSON IP and GeoIP REST API
 
+Available in [PyPI][1].
+
 ### Requirements
 
 Python 2.6 or later
@@ -46,3 +48,4 @@ geoip.isp or geoip['isp']
 geoip.timezone or geoip['timezone']
 ```
 
+  [1]: https://pypi.python.org/pypi/lizepy
