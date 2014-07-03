@@ -1,5 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+__author__ = 'Alexandre Vicenzi'
+__version__ = '0.3.2'
+__license__ = 'MIT'
+
+'''
+The MIT License (MIT)
+
+Copyright (c) 2014 Alexandre Vicenzi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+'''
+
 import json
-import re
 import sys
 
 if sys.version_info[0] == 2:
@@ -8,7 +38,7 @@ elif sys.version_info[0] == 3:
     from urllib.request import Request, urlopen
     from urllib.error import HTTPError
 else:
-    raise ImportError('Module for urllib found.')
+    raise ImportError('Module for urllib not found.')
 
 if sys.version_info[0] < 3:
     from cStringIO import StringIO
@@ -22,22 +52,22 @@ TELIZE_BASE_URL_GEOIP = TELIZE_BASE_URL + '/geoip/'
 class GeoIP:
 
     def __init__(self):
-        self.ip = None # (Visitor IP address, or IP address specified as parameter)
-        self.country_code = None # (Two-letter ISO 3166-1 alpha-2 country code)
-        self.country_code3 = None # (Three-letter ISO 3166-1 alpha-3 country code)
-        self.country = None # (Name of the country)
-        self.region_code = None # (Two-letter ISO-3166-2 state / region code)
-        self.region = None # (Name of the region)
-        self.city = None # (Name of the city)
-        self.postal_code = None # (Postal code / Zip code)
+        self.ip = None             # (Visitor IP address, or IP address specified as parameter)
+        self.country_code = None   # (Two-letter ISO 3166-1 alpha-2 country code)
+        self.country_code3 = None  # (Three-letter ISO 3166-1 alpha-3 country code)
+        self.country = None        # (Name of the country)
+        self.region_code = None    # (Two-letter ISO-3166-2 state / region code)
+        self.region = None         # (Name of the region)
+        self.city = None           # (Name of the city)
+        self.postal_code = None    # (Postal code / Zip code)
         self.continent_code = None # (Two-letter continent code)
-        self.latitude = None # (Latitude)
-        self.longitude = None # (Longitude)
-        self.dma_code = None # (DMA Code)
-        self.area_code = None # (Area Code)
-        self.asn = None # (Autonomous System Number)
-        self.isp = None # (Internet service provider)
-        self.timezone = None # (Time Zone)
+        self.latitude = None       # (Latitude)
+        self.longitude = None      # (Longitude)
+        self.dma_code = None       # (DMA Code)
+        self.area_code = None      # (Area Code)
+        self.asn = None            # (Autonomous System Number)
+        self.isp = None            # (Internet service provider)
+        self.timezone = None       # (Time Zone)
 
     def __str__(self):
         return str(self.__dict__)

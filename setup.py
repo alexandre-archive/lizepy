@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 try:
     from setuptools import setup
 except ImportError:
@@ -5,7 +8,7 @@ except ImportError:
 
 setup(
     name='lizepy',
-    version='0.3.1',
+    version='0.3.2',
     author='Alexandre Vicenzi',
     author_email='vicenzi.alexandre@gmail.com',
     packages=['lizepy'],
