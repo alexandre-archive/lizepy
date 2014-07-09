@@ -78,13 +78,7 @@ class GeoIP:
     def __getitem__(self, key):
         return self.__dict__.get(key)
 
-def __json(value):
-    try:
-        return json.loads(value)
-    except ValueError:
-        return None
-
-def __get(url):
+def _do_request(url):
 
     req = Request(url, headers={ 'Accept': 'application/json' })
 
@@ -100,7 +94,7 @@ def __get(url):
     else:
         body = response.read()
 
-    return {'code' : response.code, 'body' : __json(body.decode('utf-8'))}
+    return {'code' : response.code, 'body' : json.loads(body.decode('utf-8'))}
 
 def get_ip():
     '''
@@ -108,7 +102,7 @@ def get_ip():
         :return The visitor IP address.
         :rtype str, unicode or None
     '''
-    response = __get(TELIZE_BASE_URL_IP)
+    response = _do_request(TELIZE_BASE_URL_IP)
 
     if response['code'] == 200:
         return response['body'].get('ip')
@@ -127,7 +121,7 @@ def get_geoip(ip=None):
         assert(type(ip) == str)
         url = url + ip
 
-    response = __get(url)
+    response = _do_request(url)
 
     if response['code'] == 200:
 
