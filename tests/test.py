@@ -14,19 +14,9 @@ class TestLizePy(unittest.TestCase):
         self.assertNotEqual(ip, '')
         self.assertNotEqual(ip, None)
 
-    def test_ip_with_invalid_url(self):
-        # Force an error.
-        lizepy.TELIZE_BASE_URL_IP = 'http://www.example.com/ip'
-        self.assertRaises(ValueError, lizepy.get_ip)
-
     def test_geoip(self):
         ip = lizepy.get_geoip()
         self.assertTrue(isinstance(ip, lizepy.GeoIP))
-
-    def test_geoip_with_invalid_url(self):
-        # Force an error.
-        lizepy.TELIZE_BASE_URL_GEOIP = 'http://www.example.com/ip'
-        self.assertRaises(ValueError, lizepy.get_geoip)
 
     def test_geoip_google(self):
         geoip = lizepy.get_geoip('8.8.8.8')

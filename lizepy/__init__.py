@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'Alexandre Vicenzi'
-__version__ = '0.3.2'
+__version__ = '0.4.0'
 __license__ = 'MIT'
 
 '''
@@ -78,6 +78,53 @@ class GeoIP:
     def __getitem__(self, key):
         return self.__dict__.get(key)
 
+class Response:
+
+    def __init__(self, url, headers, body, status, msg=''):
+        self.url = url
+        self.headers = headers
+        self.body = None
+        self.status_code = status
+        self.message = msg
+        self.json = None
+
+        if headers.get('Content-Encoding') == 'gzip':
+            buf = StringIO(body)
+            f = gzip.GzipFile(fileobj=buf)
+            self.body = f.read()
+        else:
+            self.body = body
+
+        if self.status_code == 200 and self.body:
+            self.json = json.loads(body.decode('utf-8'))
+
+    def as_geo_ip(self):
+        json = self.json
+
+        if not json:
+            return None
+
+        g = GeoIP()
+
+        g.ip = json.get('ip')
+        g.country_code = json.get('country_code')
+        g.country_code3 = json.get('country_code3')
+        g.country = json.get('country')
+        g.region_code = json.get('region_code')
+        g.region = json.get('region')
+        g.city = json.get('city')
+        g.postal_code = json.get('postal_code')
+        g.continent_code = json.get('continent_code')
+        g.latitude = json.get('latitude')
+        g.longitude = json.get('longitude')
+        g.dma_code = json.get('dma_code')
+        g.area_code = json.get('area_code')
+        g.asn = json.get('asn')
+        g.isp = json.get('isp')
+        g.timezone = json.get('timezone')
+
+        return g
+
 def _do_request(url):
 
     req = Request(url, headers={ 'Accept': 'application/json' })
@@ -87,14 +134,7 @@ def _do_request(url):
     except HTTPError as e:
         response = e
 
-    if response.headers.get('Content-Encoding') == 'gzip':
-        buf = StringIO(response.read())
-        f = gzip.GzipFile(fileobj=buf)
-        body = f.read()
-    else:
-        body = response.read()
-
-    return {'code' : response.code, 'body' : json.loads(body.decode('utf-8'))}
+    return Response(response.url, response.headers, response.read(), response.code, response.msg)
 
 def get_ip():
     '''
@@ -104,10 +144,10 @@ def get_ip():
     '''
     response = _do_request(TELIZE_BASE_URL_IP)
 
-    if response['code'] == 200:
-        return response['body'].get('ip')
-    else:
+    if response.status_code != 200:
         return None
+
+    return response.json.get('ip')
 
 def get_geoip(ip=None):
     '''
@@ -121,33 +161,7 @@ def get_geoip(ip=None):
         assert(type(ip) == str)
         url = url + ip
 
-    response = _do_request(url)
-
-    if response['code'] == 200:
-
-        b = response['body']
-        g = GeoIP()
-
-        g.ip = b.get('ip')
-        g.country_code = b.get('country_code')
-        g.country_code3 = b.get('country_code3')
-        g.country = b.get('country')
-        g.region_code = b.get('region_code')
-        g.region = b.get('region')
-        g.city = b.get('city')
-        g.postal_code = b.get('postal_code')
-        g.continent_code = b.get('continent_code')
-        g.latitude = b.get('latitude')
-        g.longitude = b.get('longitude')
-        g.dma_code = b.get('dma_code')
-        g.area_code = b.get('area_code')
-        g.asn = b.get('asn')
-        g.isp = b.get('isp')
-        g.timezone = b.get('timezone')
-
-        return g
-    else:
-        return None
+    return _do_request(url).as_geo_ip()
 
 if __name__ == '__main__':
     print(get_ip())
