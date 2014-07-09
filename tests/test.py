@@ -17,18 +17,16 @@ class TestLizePy(unittest.TestCase):
     def test_ip_with_invalid_url(self):
         # Force an error.
         lizepy.TELIZE_BASE_URL_IP = 'http://www.example.com/ip'
-        ip = lizepy.get_ip()
-        self.assertIsNone(ip)
+        self.assertRaises(ValueError, lizepy.get_ip)
 
     def test_geoip(self):
         ip = lizepy.get_geoip()
-        self.assertIsInstance(ip, lizepy.GeoIP)
+        self.assertTrue(isinstance(ip, lizepy.GeoIP))
 
     def test_geoip_with_invalid_url(self):
         # Force an error.
         lizepy.TELIZE_BASE_URL_GEOIP = 'http://www.example.com/ip'
-        ip = lizepy.get_geoip()
-        self.assertIsNone(ip)
+        self.assertRaises(ValueError, lizepy.get_geoip)
 
     def test_geoip_google(self):
         geoip = lizepy.get_geoip('8.8.8.8')
@@ -63,7 +61,7 @@ class TestLizePy(unittest.TestCase):
         self.assertEqual(geoip['country_code3'] , 'USA')
 
     def test_geoip_none(self):
-        self.assertRaises(lizepy.get_geoip(None))
+        self.assertRaises(AssertionError, lizepy.get_geoip, 1)
 
 if __name__ == '__main__':
     unittest.main()
