@@ -1,3 +1,8 @@
+# IMPORTANT INFORMATION
+The public API of [Telize](http://www.telize.com/) will permanently shut down on November 15th, 2015. More information can be found [here](http://www.cambus.net/adventures-in-running-a-free-public-api/).
+
+This project is no longer useful.
+
 # LizePy [![Build Status](https://travis-ci.org/alexandrevicenzi/lizepy.svg)](https://travis-ci.org/alexandrevicenzi/lizepy) [![Coverage Status](https://coveralls.io/repos/alexandrevicenzi/lizepy/badge.png)](https://coveralls.io/r/alexandrevicenzi/lizepy)
 
 Python lib for Telize JSON IP and GeoIP REST API
